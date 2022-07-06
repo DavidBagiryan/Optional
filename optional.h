@@ -154,7 +154,7 @@ public:
     
     template <typename... Types>
     T& Emplace(Types&&... values) {
-        if (is_initialized_) optional_->~T();
+        Reset();
         optional_ = new (&data_[0]) T(std::forward<Types>(values)...);
         is_initialized_ = true;
         return *optional_;
